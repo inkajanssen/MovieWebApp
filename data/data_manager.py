@@ -1,4 +1,4 @@
-from models import db, User, Movies, UsersFavoriteMovie
+from .models import db, User, Movies, UsersFavoriteMovie
 
 class DataManager():
     """

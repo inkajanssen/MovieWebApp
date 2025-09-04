@@ -20,6 +20,11 @@ class User(db.Model):
     def __repr__(self):
         return f"ID: {self.id}, name: {self.name}"
 
+    favorite_movies = db.relationship("movies",
+                                      secondary= "favorite_movies",
+                                      backref = "users",
+                                      lazy= "dynamic")
+
 
 # Class for Movies
 class Movies(db.Model):
