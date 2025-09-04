@@ -1,6 +1,6 @@
 from .models import db, User, Movies, UsersFavoriteMovie
 
-class DataManager():
+class DataManager:
     """
     Class to interact with a SQLite database.
     Implements all the basic CRUD methods.

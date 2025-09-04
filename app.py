@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for, flash
 from dotenv import load_dotenv
 import os
 
@@ -22,26 +22,30 @@ db.init_app(app)
 #Create an object of Datamanager
 data_manager = DataManager()
 
-@app.route('/', method=['GET'])
+@app.route('/', methods=['GET'])
 def home():
     """
     TODO
     The home page of the application.
     Shows a list of all registered users and a form for adding new users.
     """
-    return "Welcome to MoviWeb App!"
+    users = data_manager.get_users()
+    return render_template('index.html', users=users)
 
 
-@app.route('/users', method=['GET', 'POST'])
-def list_users():
+@app.route('/users', methods=['POST'])
+def create_user():
     """
     TODO
     When the user submits the “add user” form, a POST request is made.
     The server receives the new user info, adds it to the database,
     then redirects back to /
     """
-    users = data_manager.get_users()
-    return str(users)  # Temporarily returning users as a string
+    user = request.form.get('create_user')
+    message = data_manager.create_user(user)
+    flash(message)
+
+    return redirect(url_for('home'))
 
 
 @app.route('/users/<int:user_id>/movies', methods=['GET'])
