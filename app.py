@@ -1,9 +1,11 @@
 from flask import Flask
-from flask.cli import load_dotenv
+from dotenv import load_dotenv
 import os
 
 from data import db, User, Movies, UsersFavoriteMovie
 from data import DataManager
+from api import get_info_from_api
+
 
 #Initialize Flask app
 app = Flask(__name__)
