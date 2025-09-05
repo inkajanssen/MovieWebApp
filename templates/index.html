@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Users</h1>
+<h1 class="banner">Users</h1>
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
@@ -15,15 +15,15 @@
 <ul class="user-list">
     {% for user in users %}
     <li class="user-entry">
-        <a href="{{ url_for('favorite_movies_of_user', user_id=user.id) }}" class="btn">{{ user.name }}</a>
+        <a href="{{ url_for('favorite_movies_of_user', user_id=user.id) }}" class="fancy-button">{{ user.name }}</a>
     </li>
     {% endfor %}
 </ul>
 
 <form action="{{ url_for('create_user') }}" method="post">
-    <label for="create_user">Create User</label>
-    <input type="text" id="create_user" name="create_user" required>
-    <input type="submit" value="Create User">
+    <label for="create_user" class="fancy-label">Add new User</label>
+    <input type="text" id="create_user" name="create_user" value="Username"required>
+    <input type="submit" value="Create User" class="fancy-button">
 </form>
 
 {% endblock %}

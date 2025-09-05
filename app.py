@@ -107,6 +107,10 @@ def remove_movie_from_users_list(user_id, movie_id):
     return redirect(url_for('favorite_movies_of_user', user_id=user_id))
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 if __name__ == "__main__":
     # Done once to create database, comment out after
     #with app.app_context():

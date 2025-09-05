@@ -1,0 +1,496 @@
+/* Global Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  background-color: #f9fafb;
+  color: #333;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  padding-top: 4rem;
+}
+
+h1.banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #007bff; /* same primary blue as links/buttons */
+  color: white;
+  font-size: 1.75rem; /* slightly smaller to fit better in banner */
+  font-weight: 700;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: #0056b3;
+  outline: none;
+  text-decoration: underline;
+}
+
+/* Buttons and inputs styled as buttons */
+input[type="submit"],
+.btn {
+  cursor: pointer;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+.btn:hover,
+.btn:focus {
+  background-color: #0056b3;
+  outline: none;
+}
+
+/* Forms */
+form {
+  margin-top: 1rem;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Flashed messages */
+ul.flashes {
+  padding-left: 1.25rem;
+  margin: 1rem 0;
+  color: #b22222; /* Dark red, indicating errors/messages */
+  font-weight: 600;
+}
+
+/* ===============================
+   404 Page Styles
+   =============================== */
+
+div.404 {
+  text-align: center;
+  margin: 4rem 0;
+}
+
+div.404 h1 {
+  font-size: 3rem;
+  color: #b22222;
+  margin-bottom: 1rem;
+}
+
+div.404 p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+div.404 .backlink {
+  font-size: 1.1rem;
+  background-color: #b22222;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  color: white;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+div.404 .backlink:hover,
+div.404 .backlink:focus {
+  background-color: #7a1313;
+  outline: none;
+}
+
+/* ===============================
+   Index Page (User List) Styles
+   =============================== */
+
+/* User List - Horizontal Layout */
+.user-list {
+  display: flex;
+  flex-wrap: wrap;         /* allow wrapping to next line if needed */
+  gap: 1rem;               /* space between user entries */
+  justify-content: center; /* center the row contents */
+  padding-left: 0;         /* remove default ul padding */
+  margin: 1.5rem 0;
+  list-style: none;        /* remove bullets */
+}
+
+/* Individual User Entry */
+.user-entry {
+  flex: 0 1 auto;          /* allow shrinking, no fixed grow */
+  min-width: 130px;        /* minimum block size */
+  max-width: 180px;        /* reasonable maximum width */
+  text-align: center;
+}
+
+/* Style the user buttons inside */
+.user-entry .btn {
+  display: inline-block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.user-entry .btn:hover,
+.user-entry .btn:focus {
+  background-color: #0056b3;
+  outline: none;
+}
+
+
+form[ action$="create_user"] {
+  max-width: 400px;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+
+/* ===============================
+   Movies Page Styles
+   =============================== */
+
+/* Movie Grid */
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Each Movie card */
+.movie-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+}
+
+.movie-card:hover,
+.movie-card:focus-within {
+  box-shadow: 0 5px 15px rgb(0 0 0 / 0.15);
+}
+
+.movie-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+  aspect-ratio: 2 / 3;
+}
+
+/* Movie information */
+.movie-card p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: #555;
+  width: 100%;
+  text-align: center;
+}
+
+/* Forms inside movie-card */
+.movie-card form {
+  width: 100%;
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-card form input[type="text"] {
+  flex-grow: 1;
+  max-width: 150px;
+}
+
+.movie-card form input[type="submit"] {
+  flex-shrink: 0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+}
+
+/* Add movie form at the bottom */
+form[action$="add_movie_to_favorite"] {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+form[action$="add_movie_to_favorite"] label {
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+form[action$="add_movie_to_favorite"] input[type="text"] {
+  width: 240px;
+  max-width: 90vw;
+  display: inline-block;
+}
+
+/* Backlink styling (re-used) */
+.backlink {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.backlink:hover,
+.backlink:focus {
+  color: #0056b3;
+  outline: none;
+  text-decoration: underline;
+}
+
+/* ===============================
+   Fancy Buttons Styles
+   =============================== */
+
+/* Fancy label styling */
+.fancy-label {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  background: transparent;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+  margin-bottom: 0.25rem;
+
+}
+
+
+/* Ensure consistent spacing between label and input */
+.fancy-label + input[type="text"] {
+  display: block;
+  margin-top: 0.35rem;
+  padding: 0.5rem;
+  border: 2px solid #2575fc;
+  border-radius: 6px;
+  width: 240px;
+  max-width: 90vw;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.fancy-label + input[type="text"]:focus {
+  border-color: #6a11cb;
+  outline: none;
+}
+
+/* Fancy button styling - matches fancy-label style */
+.fancy-button {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgb(37 117 252 / 0.5);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  /* Avoid default input button appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-top: 0.25rem;
+}
+
+.fancy-button:hover,
+.fancy-button:focus {
+  background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+  box-shadow: 0 6px 14px rgb(106 17 203 / 0.7);
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* Disabled state (optional) */
+.fancy-button:disabled,
+.fancy-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #999;
+  transform: none;
+}
+
+/* Fancy Delete button styling - red themed */
+.fancy-delete-button {
+  background: linear-gradient(135deg, #dc3c4a 0%, #b22222 100%); /* bright red to dark red */
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0 4px 10px rgba(220, 60, 74, 0.5); /* red shadow */
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+  outline: none;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin-top: 0.25rem;
+}
+
+.fancy-delete-button:hover,
+.fancy-delete-button:focus {
+  background: linear-gradient(135deg, #b22222 0%, #dc3c4a 100%); /* reversed gradient */
+  box-shadow: 0 6px 14px rgba(178, 34, 34, 0.7);
+  transform: scale(1.05);
+  outline: none;
+}
+
+/* Disabled state */
+.fancy-delete-button:disabled,
+.fancy-delete-button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #a94442;
+  transform: none;
+}
+
+/* ===============================
+   Responsive Design
+   =============================== */
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem auto;
+    padding: 0 1rem;
+    padding-top: 5rem;
+  }
+
+   h1.banner {
+    font-size: 2rem;
+    padding: 1rem 1rem;
+  }
+
+  .user-list {
+    justify-content: center;
+  }
+
+  .user-entry {
+    flex: 1 1 120px;
+    max-width: 180px;
+  }
+
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .movie-card img {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* Small devices (mobile) */
+@media (max-width: 480px) {
+   h1.banner {
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+   .container {
+    padding-top: 3.5rem;
+  }
+}
+
+  .movie-card form {
+    flex-direction: column;
+  }
+
+  .movie-card form input[type="text"] {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  form[action$="add_movie_to_favorite"] input[type="text"] {
+    width: 100%;
+  }
+
+  .user-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-entry {
+    width: 100%;
+    width: 240px;
+  }
+}
