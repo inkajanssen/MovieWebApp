@@ -32,6 +32,9 @@ def home():
     Shows a list of all registered users and a form for adding new users.
     """
     users = data_manager.get_users()
+    if not users:
+        return redirect(url_for('404'))
+
     return render_template('index.html', users=users)
 
 
@@ -43,6 +46,10 @@ def create_user():
     then redirects back to /
     """
     user = request.form.get('create_user')
+    if not user:
+        flash(message="Failed to create user. Please try again")
+        return redirect(url_for('home'))
+
     message = data_manager.create_user(user)
     flash(message)
 
@@ -57,6 +64,11 @@ def favorite_movies_of_user(user_id):
     """
     user = db.session.get(User, user_id)
     favorite_movies = data_manager.get_movies(user_id)
+
+    if not user or not favorite_movies:
+        flash(message="Error:Failed to get User or Movies. Please try again.")
+        return redirect(url_for('home'))
+
     return render_template('movies.html', movies=favorite_movies, user=user)
 
 
@@ -67,6 +79,10 @@ def add_movie_to_favorite(user_id):
     """
     movie_title = request.form.get('add_movie')
     movie_info = get_info_from_api(movie_title)
+
+    if not movie_title or not movie_info:
+        flash(message="Error: Could not get Title or Movie. Please try again.")
+        return redirect(url_for('favorite_movies_of_user', user_id=user_id))
 
     if movie_info.get("Response") == "False":
         message = "Your movie could not be found. Please try again"
@@ -90,6 +106,10 @@ def change_movie_title(user_id, movie_id):
     Modify the title of a specific movie in a user’s list
     """
     new_title = request.form.get("change_title")
+    if not new_title:
+        flash(message="Could not retrieve new Title. Please try again.")
+        return redirect(url_for('favorite_movies_of_user', user_id=user_id))
+
     message = data_manager.update_movie(movie_id, new_title)
     flash(message)
 
@@ -110,6 +130,7 @@ def remove_movie_from_users_list(user_id, movie_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
 
 if __name__ == "__main__":
     # Done once to create database, comment out after
