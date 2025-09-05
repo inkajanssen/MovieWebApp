@@ -37,12 +37,30 @@ class DataManager:
         return []
 
 
-    def add_movie(self, user_id, movie):
+    def create_movie(self, name, poster_url, director=None, release_date=None):
+        """
+        Checks if a movie already exists
+        If not:
+        Adds a movie to the database
+        """
+        movie = Movies.query.filter_by(name=name).first()
+
+        if movie is None:
+            new_movie = Movies(name=name, poster_url=poster_url,
+                           director=director, release_date=release_date)
+            db.session.add(new_movie)
+            db.session.commit()
+            return new_movie
+        else:
+            return movie
+
+
+    def add_movie_to_user(self, user_id, movie):
         """
         Add a new movie to a user’s favorites.
         """
-        user = User.query.get(user_id)
-        new_movie = Movies.query.filter_by(name=movie['name']).first()
+        user = db.session.get(User, user_id)
+        new_movie = Movies.query.filter_by(name=movie.name).first()
 
         user.favorite_movies.append(new_movie)
         db.session.commit()

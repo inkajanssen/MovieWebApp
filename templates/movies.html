@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+<h1>Favorite Movies for {{ user.name }}</h1>
 
-</body>
-</html>
+<a href="{{ url_for('home')}}" class="backlink">Back to Users</a>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<div class="movies-grid">
+    {% for movie in movies %}
+    <div class="movie-card">
+        <img src= "{{movie.poster_url}}" alt="{ movie.name}}">
+
+        <form action="{{ url_for('change_movie_title', movie_id=movie.id, user_id=user.id) }}" method="post">
+        <input type="text" id="change_title" name="change_title" value="{{ movie.name }}" required>
+        <input type="submit" value="Update">
+        </form>
+
+        <p>Release Date: {{ movie.release_date }}</p>
+        <p>Director: {{ movie.director }}</p>
+
+
+    </div>
+    {% endfor %}
+</div>
+
+<!--<ul class="movie-list">-->
+<!--    {% for movie in movies %}-->
+<!--    <li>{{movie.name}}</li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+
+<form action="{{ url_for('add_movie_to_favorite', user_id=user.id) }}" method="post">
+    <label for="add_movie">Add Movie</label>
+    <input type="text" id="add_movie" name="add_movie" required>
+    <input type="submit" value="Add Movie">
+</form>
+
+{% endblock %}
