@@ -72,7 +72,10 @@ class DataManager:
         """
         Update the details of a specific movie in the database.
         """
-        movie_to_update = Movies.query.filter_by(id = movie_id).first()
+        movie_to_update = db.session.get(Movies, movie_id)
+        if not movie_to_update:
+            return "Error: Movie not found."
+
         movie_to_update.name = new_title
         db.session.commit()
 

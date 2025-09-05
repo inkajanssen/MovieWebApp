@@ -89,8 +89,11 @@ def change_movie_title(user_id, movie_id):
     """
     Modify the title of a specific movie in a user’s list
     """
-    new_title = request.form.get()
+    new_title = request.form.get("change_title")
+    message = data_manager.update_movie(movie_id, new_title)
+    flash(message)
 
+    return redirect(url_for('favorite_movies_of_user', user_id=user_id))
 
 
 @app.route('/users/<int:user_id>/movies/<int:movie_id>/delete', methods=['POST'])
