@@ -65,9 +65,9 @@ def favorite_movies_of_user(user_id):
     user = db.session.get(User, user_id)
     favorite_movies = data_manager.get_movies(user_id)
 
-    if not user or not favorite_movies:
-        flash(message="Error:Failed to get User or Movies. Please try again.")
-        return redirect(url_for('home'))
+    # if not user or not favorite_movies:
+    #     flash(message="Error:Failed to get User or Movies. Please try again.")
+    #     return redirect(url_for('home'))
 
     return render_template('movies.html', movies=favorite_movies, user=user)
 
