@@ -101,7 +101,10 @@ def remove_movie_from_users_list(user_id, movie_id):
     """
     Remove a specific movie from a user’s favorite movie list.
     """
-    pass
+    message = data_manager.delete_movie(user_id, movie_id)
+    flash(message)
+
+    return redirect(url_for('favorite_movies_of_user', user_id=user_id))
 
 
 if __name__ == "__main__":

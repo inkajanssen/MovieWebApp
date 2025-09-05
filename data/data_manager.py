@@ -89,6 +89,9 @@ class DataManager:
         user = User.query.get(user_id)
         movie_to_remove = Movies.query.get(movie_id)
 
+        if not user or not movie_to_remove:
+            return "Error: Movie could not be found"
+
         user.favorite_movies.remove(movie_to_remove)
         db.session.commit()
 
