@@ -8,6 +8,7 @@ from data import db, User, Movies, UsersFavoriteMovie
 from data import DataManager
 from api import get_info_from_api
 
+POSTER_URL = "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1159&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
 #Initialize Flask app
 app = Flask(__name__)
@@ -46,6 +47,7 @@ def create_user():
     then redirects back to /
     """
     user = request.form.get('create_user')
+
     if not user:
         flash(message="Failed to create user. Please try again")
         return redirect(url_for('home'))
@@ -65,10 +67,6 @@ def favorite_movies_of_user(user_id):
     user = db.session.get(User, user_id)
     favorite_movies = data_manager.get_movies(user_id)
 
-    # if not user or not favorite_movies:
-    #     flash(message="Error:Failed to get User or Movies. Please try again.")
-    #     return redirect(url_for('home'))
-
     return render_template('movies.html', movies=favorite_movies, user=user)
 
 
@@ -77,7 +75,7 @@ def add_movie_to_favorite(user_id):
     """
     Add a new movie to a user’s list of favorite movies.
     """
-    movie_title = request.form.get('add_movie')
+    movie_title = request.form.get('add_movie').strip()
     movie_info = get_info_from_api(movie_title)
 
     if not movie_title or not movie_info:
@@ -91,7 +89,13 @@ def add_movie_to_favorite(user_id):
 
     title = movie_info.get('Title')
     poster = movie_info.get('Poster')
-    release_date = datetime.strptime(movie_info.get('Released'), '%d %b %Y')
+    if poster == 'N/A':
+        poster = POSTER_URL
+    release_date = movie_info.get('Released')
+    if release_date != 'N/A':
+        release_date= datetime.strptime(release_date, '%d %b %Y')
+    else:
+        release_date = None
     director = movie_info.get('Director')
 
     movie = data_manager.create_movie(title, poster, director, release_date)

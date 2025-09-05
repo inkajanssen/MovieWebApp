@@ -10,11 +10,14 @@ class DataManager:
         """
         Add a new user to your database.
         """
-        new_user = User(name=name)
-        db.session.add(new_user)
-        db.session.commit()
+        user = User.query.filter_by(name=name).first()
+        if user is None:
+            new_user = User(name=name)
+            db.session.add(new_user)
+            db.session.commit()
 
-        return "User sucessfully added to the database."
+            return "User sucessfully added to the database."
+        return "User already in Database"
 
 
     def get_users(self):
