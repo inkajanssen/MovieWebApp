@@ -17,7 +17,7 @@
 <div class="movies-grid">
     {% for movie in movies %}
     <div class="movie-card">
-        <img src= "{{movie.poster_url}}" alt="{ movie.name}}">
+        <img src= "{{movie.poster_url}}" alt="{{ movie.name}}">
 
         <form action="{{ url_for('change_movie_title', movie_id=movie.id, user_id=user.id) }}" method="post">
         <input type="text" id="change_title" name="change_title" value="{{ movie.name }}" required>
